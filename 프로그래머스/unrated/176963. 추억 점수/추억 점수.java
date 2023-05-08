@@ -1,18 +1,26 @@
+import java.util.HashMap;
+
 class Solution {
     public int[] solution(String[] name, int[] yearning, String[][] photo) {
-        int[] answer = {};
-         answer = new int[photo.length];
+            int[] answer = {};
+	        answer = new int[photo.length];
+	        
+	        HashMap<String, Integer> nameMap = new HashMap<>();
+	        
+	        for(int i = 0; i < name.length; ++i) {
+	        	nameMap.put(name[i], yearning[i]);
+	        }
 	        
 	        for(int i = 0; i < photo.length; i++) {
 	        	for(int j = 0; j < photo[i].length; j++) {
-	        		for(int k = 0; k < name.length; k++) {
-	        			if(photo[i][j].equals(name[k])) {
-	        				answer[i] += yearning[k];
-	        				break;
+	        		
+	        			if(nameMap.containsKey(photo[i][j])) {
+	        				answer[i] += nameMap.get(photo[i][j]);
 	        			}
-	        		}
+	        		
 	        	}
 	        }
-        return answer;
+	        
+	        return answer;
     }
 }
