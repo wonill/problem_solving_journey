@@ -3,7 +3,7 @@ class Solution {
         long[] answer = new long[n];
         
         for(int i = 0; i < n; i++){
-            long num = x*((long)i+1);
+            long num = (long)x*(i+1);
             answer[i] = num;
         }
         
