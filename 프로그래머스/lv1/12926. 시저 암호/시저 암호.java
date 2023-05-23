@@ -6,7 +6,7 @@ class Solution {
             char c = s.charAt(i);
             if(c == ' '){
                 answer += c;
-            } else if(c >= 'A' && c <= 'Z' && c+n > 'Z' || c >= 'a' && c <= 'z' && c+n > 'z'){
+            } else if(Character.isUpperCase(c) && c+n > 'Z' || Character.isLowerCase(c) && c+n > 'z'){
                 answer += (char)(c+n-26);
             } else{
                 answer += (char)(c+n);
