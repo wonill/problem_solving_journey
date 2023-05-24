@@ -2,17 +2,17 @@ import java.util.*;
 class Solution {
     public int solution(int[] ingredient) {
         int answer = 0;
-        Stack<Integer> ingredients = new Stack<>();
-		
+        int[] stack = new int[ingredient.length];
+		int idx = 0;
 		for(int i = 0; i < ingredient.length; i++) {
-			ingredients.push(ingredient[i]);
-			if(ingredients.size() >= 4 && 
-					ingredients.get(ingredients.size()-1)==1 && 
-					ingredients.get(ingredients.size()-2)==3 && 
-					ingredients.get(ingredients.size()-3)==2 && 
-					ingredients.get(ingredients.size()-4)==1) {
-				ingredients.pop();ingredients.pop();ingredients.pop();ingredients.pop();
-				answer++;
+			stack[idx] = ingredient[i];
+			if(idx >= 3 && stack[idx] == 1  && 
+					stack[idx-1] == 3 && 
+					stack[idx-2] == 2 && 
+					stack[idx-3] == 1) {
+				idx -= 3; answer++;
+			} else {
+				idx++;
 			}
 		}
         return answer;
