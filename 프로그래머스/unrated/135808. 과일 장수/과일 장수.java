@@ -5,9 +5,6 @@ class Solution {
         int cnt = 0;
         Arrays.sort(score);
         for(int i = score.length-1; i >= 0; i--){
-            if(score[i] > k){
-                continue;
-            }
             cnt++;
             if(cnt == m){
                 answer += score[i] * m;
