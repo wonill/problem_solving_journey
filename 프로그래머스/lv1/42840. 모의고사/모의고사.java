@@ -18,22 +18,18 @@ class Solution {
                 people[2]++;
             }
         }
-        String max_index = "";
-        int max_score = -1;
-        for(int i = 0; i< people.length; i++){
-            if(people[i] > max_score){
-                max_score = people[i];
-                max_index = "" + (i+1);
-            } else if(people[i] == max_score){
-                max_index += " " + (i+1);
-            }
+        List<Integer> max_index = new ArrayList<>();
+        int max_score = Math.max(Math.max(people[0], people[1]), people[2]);
+        for(int i = 0; i < people.length; i++) {
+        	if(people[i] == max_score) {
+        		max_index.add(i+1);
+        	}
         }
-        String[] arr = max_index.split(" ");
-        answer = new int[arr.length];
-        for(int i = 0; i < answer.length; i++){
-            answer[i] = Integer.parseInt(arr[i]);
+        Collections.sort(max_index);
+        answer = new int[max_index.size()];
+        for(int i = 0; i < max_index.size(); i++) {
+        	answer[i] = max_index.get(i);
         }
-        Arrays.sort(answer);
         return answer;
     }
 }
