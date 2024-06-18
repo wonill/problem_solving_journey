@@ -6,8 +6,7 @@ function solution(numbers) {
         if (numbers[i] >= maxNum){
             answer.push(-1);
             maxNum = numbers[i];
-            stack = [];
-            stack.push(maxNum);
+            stack = [maxNum];
         }
         else {
             while(1) {
