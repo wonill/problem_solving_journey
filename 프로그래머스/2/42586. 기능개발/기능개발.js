@@ -7,7 +7,6 @@ function solution(progresses, speeds) {
         taskTimes.push(remain % speeds[i] === 0 ? parseInt(remain / speeds[i]) 
                        : parseInt(remain / speeds[i]) + 1);
     }
-    console.log(taskTimes);
     for (let taskTime of taskTimes){
         if (stack[0] < taskTime){
             answer.push(stack.length);
