@@ -4,8 +4,7 @@ function solution(progresses, speeds) {
     let stack = [];
     for (let i = 0; i < progresses.length; i++){
         let remain = 100 - progresses[i]
-        taskTimes.push(remain % speeds[i] === 0 ? parseInt(remain / speeds[i]) 
-                       : parseInt(remain / speeds[i]) + 1);
+        taskTimes.push(Math.ceil(remain / speeds[i]));
     }
     for (let taskTime of taskTimes){
         if (stack[0] < taskTime){
