@@ -1,14 +1,9 @@
 function solution(s) {
-    let count = 0;
-    let removed = 0;
+    let answer = [0, 0];
     while (s != '1'){
-        let tmp = '';
-        for (let i = 0; i < s.length; i++){
-            if (s[i] === '0') removed++;
-            else tmp += '1';
-        }
-        s = tmp.length.toString(2);
-        count++;
+        answer[1] += s.length - s.replaceAll('0','').length;
+        answer[0]++;
+        s = s.replaceAll('0','').length.toString(2);
     }
-    return [count, removed];
+    return answer; 
 }
