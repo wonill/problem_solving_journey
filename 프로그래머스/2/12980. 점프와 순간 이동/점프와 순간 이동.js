@@ -1,11 +1,3 @@
 function solution(n){
-    var ans = 0;
-    while (n > 0){
-        if (n % 2 === 0) n /= 2;
-        else {
-            n -= 1;
-            ans++;
-        }
-    }
-    return ans;
+    return n.toString(2).split('').reduce((a, b) => a + Number(b), 0);
 }
