@@ -2,16 +2,16 @@ let fs = require('fs');
 let inp = fs.readFileSync('/dev/stdin').toString().split('\n');
 let N = Number(inp[0]);
 let input = inp[1].split(' ').map(v => Number(v));
-let sequence = [...input].sort((a, b) => a - b);
-let answer = [];
+let arr = [];
 
-for (let i = 0; i < input.length; i++){
-  for (let j = 0; j < sequence.length; j++){
-    if(input[i] === sequence[j]){
-      input[i] = j;
-      sequence[j] = -1;
-      break;
-    }
+for (let i = 0; i < N; i++){
+  let min = 10000;
+  for (let j = 0; j < input.length; j++){
+    if (input[j] > 0 && (min === 10000 || input[j] < input[min])) min = j;
   }
+  input[min] = i-10000;
+}
+for (let i = 0; i < input.length; i++){
+  input[i] += 10000;
 }
 console.log(input.join(' '));
