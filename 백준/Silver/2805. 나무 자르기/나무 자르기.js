@@ -1,19 +1,16 @@
-let fs = require('fs');
-let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+let input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
 let n = Number(input[0].split(' ')[0]);
 let m = Number(input[0].split(' ')[1]);
-let woods = input[1].split(' ').map(Number).sort((a, b) => a - b);
+let woods = input[1].split(' ').map(Number);
+
 let start = 0;
-let end = woods[n - 1];
+let end = Math.max(...woods);
 
 let result;
 while (start <= end){
-  let mid = parseInt((start + end) / 2);
-  let total = 0;
-  for (let wood of woods){
-    total += (wood - Math.min(wood, mid));
-  }
-  if (total >= m) {
+  let mid = parseInt((start + end) /2);
+  let remain = woods.reduce((sum, wood) => sum + (wood - mid > 0 ? wood - mid : 0), 0);
+  if (remain >= m) {
     result = mid;
     start = mid + 1;
   }
