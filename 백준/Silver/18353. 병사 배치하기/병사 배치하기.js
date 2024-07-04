@@ -1,22 +1,22 @@
-let fs = require('fs');
-let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+let input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
 let n = Number(input[0]);
 let soldiers = input[1].split(' ').map(Number);
 
-function lowerBound(arr, target, start, end){
+function lowerBound(arr, target){
+  let start = 0;
+  let end = arr.length;
   while (start < end){
-    let mid = Math.floor((start + end) /2);
-    if (arr[mid] >= target) end = mid;
+    let mid = parseInt((start + end) / 2);
+    if (arr[mid] <= target) end = mid;
     else start = mid + 1;
   }
-  return end;
+  return start;
 }
-soldiers.reverse();
-let lis = [0];
 
-for (let i = 0; i < n; i++){
-  let index = lowerBound(lis, soldiers[i], 0, lis.length);
-  if (index === lis.length) lis.push(soldiers[i]);
-  else lis[index] = soldiers[i];
+let result = [];
+for (let soldier of soldiers){
+  if (!result.length || result[result.length - 1] > soldier) result.push(soldier);
+  else result[lowerBound(result, soldier)] = soldier;
 }
-console.log(n - (lis.length - 1));
+
+console.log(soldiers.length - result.length);
