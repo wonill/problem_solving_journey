@@ -22,5 +22,5 @@ function solution(word) {
       }
     }
     let dictionary = [...words].sort();
-    for (let i = 0; i < dictionary.length; i++) if (word === dictionary[i]) return i;
+    return dictionary.indexOf(word);
 }
