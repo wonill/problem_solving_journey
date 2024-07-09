@@ -1,0 +1,1 @@
+const solution = num => num.split('').reduce((a, c) => a + Number(c),0);
