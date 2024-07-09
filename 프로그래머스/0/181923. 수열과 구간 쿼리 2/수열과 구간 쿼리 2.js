@@ -1,7 +1,3 @@
 function solution(arr, queries) {
-    return queries.map(v => {
-        let partition = arr.slice(v[0], v[1] + 1).filter(val => val > v[2]);
-        if (partition.length) return Math.min(...partition);
-        return -1;
-    });
+    return queries.map(([s, e, k]) => arr.slice(s, e + 1).filter(n => n > k).sort((a, b) => a - b)[0] || -1);
 }
