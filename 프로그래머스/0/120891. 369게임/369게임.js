@@ -1,0 +1,1 @@
+const solution = order => String(order).split('').reduce((cnt, num) => cnt + +(num % 3 === 0 && num > 0),0);
