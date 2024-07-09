@@ -1,0 +1,1 @@
+const solution = (before, after) => +(before.split('').reduce((a, c) => a=a.replace(c, '') ,after).length == 0);
