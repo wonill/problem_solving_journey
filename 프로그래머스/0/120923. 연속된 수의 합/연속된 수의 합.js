@@ -1,0 +1,1 @@
+const solution = (num, total) => Array.from({length : num}, (_, i) => (total - (num - 1) * num / 2) / num + i);
