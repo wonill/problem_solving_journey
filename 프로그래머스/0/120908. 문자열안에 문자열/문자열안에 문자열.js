@@ -1,0 +1,1 @@
+const solution = (str1, str2) => 2 - +str1.includes(str2);
