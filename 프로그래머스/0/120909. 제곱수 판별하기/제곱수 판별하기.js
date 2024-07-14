@@ -1,3 +1,3 @@
 function solution(n) {
-    return 2 - +(parseInt(Math.sqrt(n)) ** 2 === n);
+    return 2 - +(Number.isInteger(Math.sqrt(n)));
 }
