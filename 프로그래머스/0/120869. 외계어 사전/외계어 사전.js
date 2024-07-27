@@ -1,4 +1,3 @@
 function solution(spell, dic) {
-    return 2 - +dic.some(word => [...word].every(v => spell.includes(v)) 
-                         && !spell.some(v => !word.includes(v)));
+    return 2 - +dic.some(d => spell.sort().toString() == [...d].sort().toString());
 }
