@@ -4,5 +4,5 @@ const extractNumbers = (str) => {
 
 function solution(my_string) {
     const extractedNumbers = my_string.match(/\d+/g);
-    return extractedNumbers ? extractedNumbers.map(Number).reduce((a, c) => a + c, 0) : 0;
+    return extractedNumbers ? extractedNumbers.reduce((a, c) => a + Number(c), 0) : 0;
 }
