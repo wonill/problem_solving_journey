@@ -8,7 +8,8 @@ function solution(answers) {
     let scoreBoard = Array(3).fill(0);
     answers.forEach((answer, idx) => {
         for (let i in patterns){
-            if(patterns[i][idx % patterns[i].length] === answer) scoreBoard[i - 1]++;
+            const pattern = patterns[i];
+            if(pattern[idx % pattern.length] === answer) scoreBoard[i - 1]++;
         }
     });
     const max = Math.max(...scoreBoard);
