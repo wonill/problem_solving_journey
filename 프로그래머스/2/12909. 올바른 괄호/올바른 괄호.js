@@ -1,9 +1,8 @@
 function solution(s){
-    let stack = 0;
-    for (let i = 0; i < s.length; i++){
-        if (s.charAt(i) === '(') stack++;
-        else if (stack === 0) return false;
-        else stack--;
-    }
-    return stack === 0;
+    var answer = true;
+
+    // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
+    console.log('Hello Javascript')
+
+    return answer;
 }
