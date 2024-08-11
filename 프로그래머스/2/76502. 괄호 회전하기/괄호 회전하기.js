@@ -1,24 +1,20 @@
+const match = {
+    ']' : '[',
+    '}' : '{',
+    ')' : '('
+}
 
 function solution(s) {
+    let stack;
     let answer = 0;
-    if (s.length % 2 === 1) return 0;
-    const mapping = {']' : '[', '}' : '{', ')' : '('};
-    
     for (let i = 0; i < s.length; i++){
-        const stack = [];
         const rotate = s.slice(i) + s.slice(0, i);
-        let flag = true;
-        for (j = 0; j < s.length; j++){
-            if (rotate[j] === '[' || rotate[j] === '{' || rotate[j] === '(') stack.push(rotate[j]);
-            else {
-                let last = stack.pop();
-                if (last != mapping[rotate[j]]){
-                    flag = false;
-                    break;
-                }
-            }
+        stack = [];
+        for (let i = 0; i < rotate.length; i++){
+            if (stack.length && match[rotate[i]] === stack[stack.length - 1]) stack.pop();
+            else stack.push(rotate[i]);
         }
-        if (flag) answer++;
+        answer += +(stack.length === 0);
     }
     return answer;
 }
