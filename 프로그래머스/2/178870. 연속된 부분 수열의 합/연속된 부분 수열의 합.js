@@ -28,7 +28,7 @@ class Queue{
 }
 
 function solution(sequence, k) {
-    let partialSequences = [];
+    let Sequences = [];
     let queue = new Queue();
     for (let i = 0; i < sequence.length; i++){
         queue.enqueue(sequence[i]);
@@ -36,13 +36,13 @@ function solution(sequence, k) {
             queue.dequeue();
         }
         if (queue.total === k) {
-            partialSequences.push([queue.headIndex, queue.tailIndex - 1]);
+            Sequences.push([queue.headIndex, queue.tailIndex - 1]);
             queue.dequeue();
         }
     }
-    partialSequences.sort((a, b) =>{
+    Sequences.sort((a, b) =>{
        if ((a[1] - a[0]) == (b[1] - b[0])) return a[0] - b[0];
        return (a[1] - a[0]) - (b[1] - b[0]);
     });
-    return partialSequences[0];
+    return Sequences[0];
 }
