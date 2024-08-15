@@ -12,7 +12,7 @@ function createFive(n){
 }
 
 function solution(storey) {
-    var answer = 0;
+    var answer1 = 0;
     let power = storey.toString().length;
     while (power >= 0){
         let move = 0;
@@ -24,8 +24,8 @@ function solution(storey) {
             storey -= b;
         }
         else storey = a - storey;
-        answer += move;
+        answer1 += move;
         power--;
     }
-    return answer;
+    return answer1;
 }
