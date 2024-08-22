@@ -1,3 +1,1 @@
-function solution(nums) {
-    return nums.length / 2 > new Set(nums).size ? new Set(nums).size : nums.length / 2; 
-}
+const solution = (n) => new Set(n).size > n.length / 2 ? n.length / 2 : new Set(n).size;
