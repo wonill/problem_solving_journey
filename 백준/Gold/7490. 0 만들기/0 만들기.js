@@ -1,5 +1,12 @@
 const fs = require("fs");
-let [T, ...input] = fs.readFileSync('/dev/stdin').toString().trim().split("\n").map(Number);
+let [T, ...input] = fs
+  .readFileSync("/dev/stdin")
+  .toString()
+  .trim()
+  .split("\n")
+  .map(Number);
+
+let answer = [];
 
 const operation = {
   "+": (a, b) => a + b,
@@ -7,41 +14,37 @@ const operation = {
 };
 
 const union = (nums, opers) => {
-  return nums.reduce((a, c, i) => a + (i > 0 ? opers[i - 1] : '') + c, '');
+  return nums.reduce((a, c, i) => a + opers[i - 1] + c);
 };
 
 const getCalculation = (result) => {
-  const expr = result.replace(/ /g, '');
-  const numbers = expr.split(/[-+]/).map(Number);
-  const operators = expr.split(/\d+/).filter((v) => v !== "");
-  return numbers.reduce((a, c, i) => i === 0 ? c : operation[operators[i - 1]](a, c), 0);
+  const numbers = result.split(/[-+]/).map(Number);
+  const operators = result.split(/\d+/).filter((v) => v != "");
+  if (!operators.length) return numbers[0];
+  return numbers.reduce((a, c, i) => operation[operators[i - 1]](a, c));
 };
-
-let answer = [];
 
 input.forEach((n) => {
   let nums = Array.from({ length: n }, (_, i) => i + 1);
   let opers = [];
-  let results = [];
 
   const dfs = (depth) => {
-    if (depth === n - 1) {
+    if (depth === n) {
       const result = union(nums, opers);
-      if (getCalculation(result) === 0) {
-        results.push(result);
+      if (getCalculation(result.split(" ").join("")) === 0) {
+        answer.push(result);
       }
       return;
     }
 
-    for (let x of [' ', '+', '-']) {
+    for (let x of [" ", "+", "-"]) {
       opers.push(x);
       dfs(depth + 1);
       opers.pop();
     }
   };
 
-  dfs(0);
-  answer.push(results.join('\n'));
+  dfs(1);
+  answer.push("");
 });
-
-console.log(answer.join('\n\n'));
+console.log(answer.join("\n").trim());
