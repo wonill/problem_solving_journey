@@ -1,10 +1,10 @@
 function solution(s) {
     let [cnt, removed] = [0, 0];
     while (s != '1'){
-        const x = s.replaceAll('0', '');
-        removed += s.length - x.length;
+        const c = s.replaceAll('0', '').length;
+        removed += s.length - c;
         cnt++;
-        s = x.length.toString(2);
+        s = c.toString(2);
     }
     return [cnt, removed]; 
 }
