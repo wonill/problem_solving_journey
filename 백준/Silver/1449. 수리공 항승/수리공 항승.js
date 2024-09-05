@@ -8,9 +8,7 @@ let cnt = 0;
 let i = 0;
 let start = 0;
 while (i < n) {
-  while (arr[i] - arr[start] < l) {
-    i++;
-  }
+  while (arr[i] - arr[start] < l) i++;
   cnt++;
   start = i;
 }
