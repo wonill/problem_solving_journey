@@ -27,7 +27,6 @@ function solution(dirs) {
             visited.add(prev + next);
             visited.add(next + prev);
         }
-        console.log(location, answer);
     }
     return answer;
 }
