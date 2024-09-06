@@ -1,19 +1,13 @@
 function solution(N, stages) {
     let failureRate = [];
     stages.sort((a, b) => a - b);
-    for (let stage = 1; stage <= N; stage++){
-        let fail = 0;
-        let challenge = 0;
-        for (let i = 0; i < stages.length; i++){
-            if (stage <= stages[i]) challenge++;
-            if (stage == stages[i]) fail++;
-        }
-        if (challenge === 0) failureRate.push([stage, 0]);
-        else failureRate.push([stage, fail / challenge]);
+    let i = 0;
+    let stage = 0;
+    while (++stage <= N){
+        let start = i;
+        while (stages[i] === stage) i++;
+        const count = i - start;
+        failureRate.push((count / (stages.length - start)) || 0);
     }
-    return failureRate.sort((a, b) => {
-        if (b[1] > a[1]) return 1;
-        if (b[1] < a[1]) return -1;
-        else return a[0] - b[0];
-    }).map(v => v[0]);
+    return failureRate.map((v, i) => [i + 1, v]).sort((a, b) => b[1] - a[1] != 0 ? b[1] - a[1] : a[0] - b[0]).map(val => val[0]);
 }
