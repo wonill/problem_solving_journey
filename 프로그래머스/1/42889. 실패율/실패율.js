@@ -9,5 +9,5 @@ function solution(N, stages) {
         const count = i - start;
         failureRate.push((count / (stages.length - start)) || 0);
     }
-    return failureRate.map((v, i) => [i + 1, v]).sort((a, b) => b[1] - a[1] != 0 ? b[1] - a[1] : a[0] - b[0]).map(val => val[0]);
+    return failureRate.map((v, i) => [i + 1, v]).sort((a, b) => b[1] - a[1]).map(val => val[0]);
 }
