@@ -7,7 +7,7 @@ arr.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
 
 let map = new Map();
 for (let i = 0; i < arr.length; i++) {
-  map.set(arr[i], (map.get(arr[i]) || 0n) + 1n);
+  map.set(arr[i], (map.get(arr[i]) || 0) + 1);
 }
 
 let max = 0n;
