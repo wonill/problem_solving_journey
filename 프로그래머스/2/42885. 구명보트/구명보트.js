@@ -1,8 +1,1 @@
-function solution(people, limit) {
-    people.sort((a, b) => a - b);
-    for (var i = 0, j = people.length; i < --j;) {
-      if (people[i] + people[j] <= limit) i++;
-    }
-    return people.length - i;
-  }
-  
+const solution = (p, limit) => p.length - p.sort((a, b) => b - a).reduce((a, c, i) => a + (c + p[p.length-a-1] <= limit && i < p.length-a-1), 0);
