@@ -4,22 +4,23 @@ const input = require("fs")
   .toString()
   .trim()
   .split("\n");
-const [N, M] = input[0].split(" ").map(Number);
-const T = input.slice(1).map(Number);
+const [n, m] = input[0].split(" ").map(Number);
+const times = input.slice(1).map(Number);
 
-T.sort((a, b) => a - b);
+times.sort((a, b) => a - b);
 let min = BigInt(1);
-let max = BigInt(T[0] * M);
-let answer = max;
+let max = BigInt(times[0] * m);
 
+let answer = max;
 while (min <= max) {
-  let cnt = BigInt(0);
   let mid = BigInt((max + min) / 2n);
-  T.forEach((time) => {
-    cnt += mid / BigInt(time);
-  });
-  if (cnt >= M) {
-    answer = answer < mid ? answer : mid;
+
+  let sum = BigInt(0);
+  for (let time of times) {
+    sum += mid / BigInt(time);
+  }
+  if (sum >= m) {
+    answer = mid;
     max = mid - 1n;
   } else {
     min = mid + 1n;
