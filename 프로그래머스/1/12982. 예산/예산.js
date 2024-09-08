@@ -1,0 +1,1 @@
+const solution = (d, budget) => d.sort((a, b) => a - b).reduce((a, c) => a + ((budget -= c) >= 0), 0);
