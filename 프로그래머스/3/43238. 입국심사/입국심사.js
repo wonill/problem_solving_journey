@@ -1,27 +1,20 @@
 function solution(n, times) {
-    times.sort((a,b) => 
-               a-b);
-    let res = -1;
-    let rt = times[times.length-1] * n;
-    let lt = 0;
+  times.sort((a, b) => a - b);
     
-    while (lt<=rt){
-        let mid = Math.floor((rt+lt) / 2);
-        let max = 0;
-        
-        for (let e of times){
-            //모든 심사관의 최대 심사 횟수를 계산
-            max += Math.floor(mid / e);
+  let start = 1;
+  let end = times[0] * n;
+  
+    let result = 0;
+    while (start <= end){
+        let mid = Math.floor((start + end) / 2);
+        let sum = 0;
+        for (let time of times){
+            sum += Math.floor(mid / time);
         }
-        
-        if(max >= n){
-            //초과해서 가능할 경우
-            res = mid;
-            rt = mid - 1;
-        }else{
-            //심사가 완료가 불가능한 경우
-            lt = mid + 1;
-        }
+        if (sum >= n){
+            result = mid;
+            end = mid - 1;
+        } else start = mid + 1;
     }
-    return res;
+    return result;
 }
