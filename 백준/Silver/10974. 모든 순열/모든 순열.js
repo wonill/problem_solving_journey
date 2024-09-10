@@ -1,19 +1,28 @@
-const fs = require("fs");
-let input = fs.readFileSync("/dev/stdin").toString().trim();
-let n = Number(input);
+const filePath = process.platform === "linux" ? "/dev/stdin" : "input.txt";
+const input = require("fs")
+  .readFileSync(filePath)
+  .toString()
+  .trim()
+  .split("\n");
+
+let n = Number(input[0]);
 
 let nums = [];
+let answer = [];
+
 const dfs = (x) => {
-  if (x > n) {
-    console.log(nums.join(" "));
+  if (x === n) {
+    answer.push(nums.join(" "));
     return;
   }
   for (let i = 1; i <= n; i++) {
-    if (nums.includes(i)) continue;
-    nums.push(i);
-    dfs(x + 1);
-    nums.pop();
+    if (!nums.includes(i)) {
+      nums.push(i);
+      dfs(x + 1);
+      nums.pop();
+    }
   }
 };
 
-dfs(1);
+dfs(0);
+console.log(answer.join("\n"));
