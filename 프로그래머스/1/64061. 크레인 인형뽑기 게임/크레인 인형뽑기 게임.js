@@ -11,7 +11,7 @@ function solution(board, moves) {
             } 
         })
         if (!pick) return;
-        if (stack.length && stack[stack.length - 1] === pick) {
+        if (stack[stack.length - 1] === pick) {
             stack.pop();
             answer += 2;
         } else stack.push(pick);
