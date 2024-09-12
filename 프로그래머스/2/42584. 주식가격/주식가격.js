@@ -1,18 +1,23 @@
 function solution(prices) {
-    let answer = [];
-    prices.reverse();
+    let stack = [];
     
-    let cnt;
-    while (price = prices.pop()){
-        cnt = 0;
-        for (let i = 0; i < prices.length; i++){
-            cnt = i + 1;
-            if (prices[prices.length - 1 - i] < price) break;
+    let answer = Array(prices.length);
+    
+    for (let i = 0; i < prices.length; i++){
+        stack.push(i);
+        
+        if (prices[i] > prices[i + 1]){
+            while (prices[stack[stack.length - 1]] > prices[i + 1]){
+                let target = stack.pop();
+                answer[target] = i + 1 - target;
+            }    
         }
-        answer.push(cnt);
+        
+    }
+    while (stack.length) {
+        let k = stack.pop();
+        answer[k] = prices.length - k - 1;
     }
     return answer;
 }
-
-
 
