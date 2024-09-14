@@ -60,14 +60,13 @@ const bfs = (l, start, target) => {
     }
   }
 };
-let line = 1;
-while (t--) {
-  let l = Number(input[line]);
-  let start = input[line + 1].split(" ").map(Number);
-  let target = input[line + 2].split(" ").map(Number);
+
+for (let i = 0; i < t; i++) {
+  let l = Number(input[i * 3 + 1]);
+  let start = input[i * 3 + 2].split(" ").map(Number);
+  let target = input[i * 3 + 3].split(" ").map(Number);
 
   answer.push(bfs(l, start, target));
-  line += 3;
 }
 
 console.log(answer.join("\n"));
