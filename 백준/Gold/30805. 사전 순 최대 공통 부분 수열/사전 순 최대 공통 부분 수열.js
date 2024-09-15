@@ -26,10 +26,10 @@ for (let i = 0; i < a.length; i++) {
   // console.log(b);
 }
 
-// let result = [];
-// result.push(answer.length);
-// if (answer.length) result.push(answer.join(" "));
-// console.log(result.join("\n"));
+let result = [];
+result.push(answer.length);
+if (answer.length) result.push(answer.join(" "));
+console.log(result.join("\n"));
 
-console.log(answer.length);
-if (answer.length) console.log(answer.join(" "));
+// console.log(answer.length);
+// if (answer.length) console.log(answer.join(" "));
