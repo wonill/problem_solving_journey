@@ -33,11 +33,8 @@ while (i > 0 && j > 0) {
     sequence.push(a[i - 1]);
     i--;
     j--;
-  } else if (dp[i - 1][j] > dp[i][j - 1]) {
-    i--;
-  } else {
-    j--;
-  }
+  } else if (dp[i - 1][j] > dp[i][j - 1]) i--;
+  else j--;
 }
 
 sequence.reverse(); // 역순으로 추가되므로 뒤집기
