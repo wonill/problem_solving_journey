@@ -8,10 +8,8 @@ function solution(record) {
 
     // 첫 번째 순회: 최종 닉네임 저장
     for (const r of record) {
-        const [action, uid, nickname] = r.split(' ');
-        if (action !== 'Leave') {
-            userMap.set(uid, nickname);
-        }
+        const [action, id, nickname] = r.split(' ');
+        if (action !== 'Leave') userMap.set(id, nickname);
     }
 
     // 두 번째 순회: 메시지 생성
