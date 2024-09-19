@@ -10,9 +10,7 @@ function solution(want, number, discount) {
             if (copyMap.get(product))
                 copyMap.set(product, copyMap.get(product) - 1); 
         }
-        let sum = 0;
-        for (let value of copyMap.values()) sum += value;
-        if (sum === 0) answer++;
+        answer += [...copyMap.values()].reduce((a, b) => a + b) === 0;
     }
     return answer;
 }
