@@ -4,8 +4,7 @@ function solution(id_list, report, k) {
     let reported = removeDup.map(v => v.split(' ')[1]);
     let reportedMap = new Map();
     for (let i = 0; i < reported.length; i++){
-        if(reportedMap.get(reported[i])) reportedMap.set(reported[i], reportedMap.get(reported[i]) + 1);
-        else reportedMap.set(reported[i], 1);
+        reportedMap.set(reported[i], (reportedMap.get(reported[i]) || 0) + 1);
     }
     let reportList = new Map();
     for (let id of id_list) reportList.set(id, []);

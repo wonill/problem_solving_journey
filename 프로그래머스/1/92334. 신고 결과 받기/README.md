@@ -1,10 +1,10 @@
 # [level 1] 신고 결과 받기 - 92334 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/92334?language=javascript) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/92334) 
 
 ### 성능 요약
 
-메모리: 33.5 MB, 시간: 0.12 ms
+메모리: 90.3 MB, 시간: 294.20 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 06월 21일 16:42:20
+2024년 09월 19일 16:35:18
 
 ### 문제 설명
 
