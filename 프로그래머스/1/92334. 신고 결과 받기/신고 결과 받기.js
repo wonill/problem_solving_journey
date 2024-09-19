@@ -9,8 +9,7 @@ function solution(id_list, report, k) {
     let reportList = new Map();
     for (let id of id_list) reportList.set(id, []);
     for (let i = 0; i < removeDup.length; i++){
-        let rep = removeDup[i].split(' ')[0];
-        let reported = removeDup[i].split(' ')[1];
+        const [rep, reported] = removeDup[i].split(' ');
         reportList.get(rep).push(reported);
     }
     
