@@ -7,9 +7,7 @@ class TreeNode {
 }
 
 class BinaryTree {
-    constructor(nodeinfo) {
-        this.nodeinfo = nodeinfo;
-        this.nodeIndex = 0;
+    constructor() {
         this.root = null; 
     }
 
@@ -59,7 +57,7 @@ function solution(nodeinfo) {
     nodeinfo.forEach((v, i) => v.push(i + 1));
     nodeinfo.sort((a, b) => b[1] - a[1]);
     
-    const tree = new BinaryTree(nodeinfo);
+    const tree = new BinaryTree();
     nodeinfo.forEach(node => {
         tree.insert(node);
     })
