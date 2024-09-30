@@ -4,7 +4,7 @@ function solution(N, road, K) {
     
     road.forEach(([a, b, c]) => {
         graph[a][b] = Math.min(graph[a][b], c);
-        graph[b][a] = Math.min(graph[b][a], c);
+        graph[b][a] = graph[a][b];
     });
     for (let k = 1; k <= N; k++){
         for (let a = 1; a <= N; a++){
