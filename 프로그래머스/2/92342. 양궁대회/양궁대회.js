@@ -1,48 +1,45 @@
-const calculateScore = (appeach, lion) => {
-    let appeachScore = 0;
-    let lionScore = 0;
-    for (let i = 0; i < appeach.length; i++){
-        if (appeach[i] === 0 && lion[i] === 0) continue;
-        if (appeach[i] >= lion[i]) appeachScore += 10 - i;
-        else lionScore += 10 - i;
-    }
-    return lionScore - appeachScore;
-}
-
 function solution(n, info) {
-    let candidates = [];
-    let lion = [];
-    let max = 0;
-    const dfs = (arrow, x) => {
-        if (x === 11) {
-            if (arrow) lion[10] += arrow;
-            const score = calculateScore(info, lion);
-            if (score > max) {
-                max = score;
-                candidates = [lion.slice()];
+    const gt = (index, count, mine, yours) => {
+        if(mine > yours) {
+            if(mine - yours > diff) {
+                diff = mine - yours;
+                answer = [...counts];
+                if(n - count > 0) answer[10] = n - count;
+            } else if(mine - yours === diff) {
+                for(let i = 10; i >= 0; i--) {
+                    if(counts[i] > answer[i]) {
+                        answer = [...counts];
+                        break;
+                    } else if(counts[i] < answer[i]) {
+                        break;
+                    }
+                }
             }
-            else if (max != 0 && score === max) candidates.push(lion.slice());
-            return ;
         }
-        
-        for (let i  of [0, info[x] + 1]){
-            if (arrow >= i) {
-                lion.push(i);
-                dfs(arrow - i, x + 1);
-                lion.pop();
+        if(count === n) return;
+        for(let i = index; i < 11; i++) {
+            if(info[i] <= n - count) {
+                counts[i] = info[i];
+                if(info[i] !== 1) {
+                    gt(i + 1, count + info[i], mine + 10 - i, yours - 10 + i);
+                } else {
+                    gt(i + 1, count + info[i], mine + 10 - i, yours);
+                }
+                counts[i] = 0;
             }
         }
     }
     
-    dfs(n, 0);
+    let diff = 0;
+    let yours = 0;
+    for(let i = 0; i < info.length; i++) {
+        if(info[i] !== 0) yours += 10 - i;
+        info[i]++;
+    }
     
-    candidates.sort((a, b) => {
-        for (let i = a.length - 1 ; i >= 0; i--){
-            if (a[i] > b[i]) return -1;
-            if (a[i] < b[i]) return 1;
-        }
-        return 0;
-    })
+    let answer = [-1];
+    const counts = new Array(11).fill(0);
+    gt(0, 0, 0, yours);
     
-    return candidates.length ? candidates[0] : [-1];
+    return answer;
 }
