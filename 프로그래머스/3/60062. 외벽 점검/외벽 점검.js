@@ -1,46 +1,41 @@
 function solution(n, weak, dist) {
-    const dfs = (index, target, count) => {
-        if(index >= weak.length - 1) {
-            if(answer === -1 || count < answer) {
-                answer = count;
-            }
+    const len = weak.length;
+    weak = weak.concat(weak.map(v => v + n));
+    dist.sort((a, b) => b - a);
+    
+    let answer = Infinity;
+    
+    const dfs = (index, visited, count) => {
+        if (count >= answer) return;
+        if (visited === (1 << len) - 1) {
+            answer = Math.min(answer, count);
             return;
         }
-        let nextIndex;
-        for(let i = index + 1; i < weak.length; i++) {
-            if(weak[i] > weak[index] + target) {
-                nextIndex = i;
-                break;
-            }
-            if(i === weak.length - 1) {
-                if(answer === -1 || count < answer) {
-                    answer = count;
-                }
-                return;
-            }
-        }
-        for(let i = 0; i < dist.length; i++) {
-            if(visited[i] === false) {
-                visited[i] = true;
-                dfs(nextIndex, dist[i], count + 1);
-                visited[i] = false;
-            }
-        }
-    }
-    
-    let answer = -1;
-    const visited = new Array(dist.length).fill(false);
-    
-    for(let i = 0; i < weak.length; i++) {
-        for(let j = 0; j < dist.length; j++) {
-            visited[j] = true;
-            dfs(0, dist[j], 1);
-            visited[j] = false;
-        }
         
-        const temp = weak.shift();
-        weak.push(temp + n);
+        if (count === dist.length) return;
+        
+        const distance = dist[count];
+        for (let start = index; start < index + len; start++) {
+            let end = weak[start] + distance;
+            let nextVisited = visited;
+            
+            for (let i = start; i < start + len; i++) {
+                if (weak[i] <= end) {
+                    nextVisited |= (1 << (i % len));
+                } else {
+                    break;
+                }
+            }
+            
+            if (nextVisited !== visited) {
+                dfs(start + 1, nextVisited, count + 1);
+            }
+        }
+    };
+    
+    for (let i = 0; i < len; i++) {
+        dfs(i, 0, 0);
     }
     
-    return answer;
+    return answer === Infinity ? -1 : answer;
 }
