@@ -1,41 +1,49 @@
-function solution(n, weak, dist) {
-    const len = weak.length;
-    weak = weak.concat(weak.map(v => v + n));
-    dist.sort((a, b) => b - a);
-    
-    let answer = Infinity;
-    
-    const dfs = (index, visited, count) => {
-        if (count >= answer) return;
-        if (visited === (1 << len) - 1) {
-            answer = Math.min(answer, count);
-            return;
-        }
-        
-        if (count === dist.length) return;
-        
-        const distance = dist[count];
-        for (let start = index; start < index + len; start++) {
-            let end = weak[start] + distance;
-            let nextVisited = visited;
-            
-            for (let i = start; i < start + len; i++) {
-                if (weak[i] <= end) {
-                    nextVisited |= (1 << (i % len));
-                } else {
-                    break;
-                }
-            }
-            
-            if (nextVisited !== visited) {
-                dfs(start + 1, nextVisited, count + 1);
-            }
-        }
-    };
-    
-    for (let i = 0; i < len; i++) {
-        dfs(i, 0, 0);
+const getPermutations = (arr) => {
+  const result = [];
+  
+  const dfs = (current, rest) => {
+    if (rest.length === 0) {
+      result.push(current);
+      return;
     }
     
-    return answer === Infinity ? -1 : answer;
-}
+    for (let i = 0; i < rest.length; i++) {
+      dfs([...current, rest[i]], [...rest.slice(0, i), ...rest.slice(i + 1)]);
+    }
+  };
+  
+  dfs([], arr);
+  return result;
+};
+
+const solution = (n, weak, dist) => {
+  let answer = Infinity;
+  const len = weak.length;
+  weak = weak.concat(weak.map((v) => v + n));
+  
+  const permutations = getPermutations(dist);
+  
+  const dfs = (start, end, cnt, distArr) => {
+    if (start === end) {
+      answer = Math.min(answer, cnt);
+      return;
+    }
+    
+    if (cnt === distArr.length) return;
+    if (cnt >= answer) return;
+    
+    for (let j = end - 1; j >= start; j--) {
+      if (weak[j] - weak[start] <= distArr[cnt]) {
+        dfs(j + 1, end, cnt + 1, distArr);
+      }
+    }
+  };
+  
+  for (const perm of permutations) {
+    for (let i = 0; i < len; i++) {
+      dfs(i, i + len, 0, perm);
+    }
+  }
+  
+  return answer === Infinity ? -1 : answer;
+};
