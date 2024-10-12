@@ -1,1 +1,1 @@
-const solution = (n) => [...n.toString(2)].reduce((a, b) => a + Number(b), 0)
+const solution = (n) => n.toString(2).replaceAll('0','').length;
