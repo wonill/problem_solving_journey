@@ -7,11 +7,11 @@ const direction = {
 
 function solution(keyinput, board) {
     const [maxX, maxY] = board.map(v => Math.floor(v / 2));
-    return keyinput.reduce((pos, key) => {
-        const [dx, dy] = direction[key] || [0, 0];
+    return keyinput.reduce((position, key) => {
+        const [dx, dy] = direction[key];
         return [
-            Math.max(-maxX, Math.min(maxX, pos[0] + dx)),
-            Math.max(-maxY, Math.min(maxY, pos[1] + dy))
+            Math.max(-maxX, Math.min(maxX, position[0] + dx)),
+            Math.max(-maxY, Math.min(maxY, position[1] + dy))
         ];
     }, [0, 0]);
 }
