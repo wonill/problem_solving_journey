@@ -15,7 +15,6 @@ function solution(line) {
             if (intersection.every(v => Number.isInteger(v))) intersections.push(intersection);
         }
     }
-    intersections.sort((a, b) => b[1] - a[1]);
     const [maxX, minX, maxY, minY] = intersections.reduce((acc, [x, y]) =>  
             acc = [Math.max(x, acc[0]), Math.min(x, acc[1]), Math.max(y, acc[2]), Math.min(y, acc[3])], 
                          [-Infinity, Infinity, -Infinity, Infinity]);
