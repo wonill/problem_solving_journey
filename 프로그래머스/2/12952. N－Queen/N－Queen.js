@@ -1,15 +1,16 @@
-function isValid(visited, row, i){
-    for (let a = 0; a < row; a++){
-        const b = visited[a].indexOf(true);
-        if (b === i || Math.abs(b - i) === Math.abs(row - a)) return false;
+const isValidPosition = (visited, row, col) => {
+    for (let i = 0; i < row; i++) {
+        const targetIdx = visited[i].indexOf(true);
+        if (targetIdx === col || Math.abs(i - row) === Math.abs(targetIdx - col)){
+            return false;
+        }
     }
     return true;
 }
 
-
 function solution(n) {
     let answer = 0;
-    let visited = Array.from({length:n}, () => Array(n).fill(false));
+    const visited = Array.from({length: n}, () => Array(n).fill(false));
     
     const dfs = (row) => {
         if (row === n) {
@@ -17,14 +18,17 @@ function solution(n) {
             return;
         }
         
-        for (let i = 0; i < visited.length; i++){
-            if(isValid(visited, row, i)){
-                visited[row][i] = true;
+        for (let col = 0; col < n; col++){
+            if (isValidPosition(visited, row, col)){
+                visited[row][col] = true;
                 dfs(row + 1);
-                visited[row][i] = false;
+                visited[row][col] = false;
             }
         }
+        
+        
     }
+    
     dfs(0);
     
     return answer;
