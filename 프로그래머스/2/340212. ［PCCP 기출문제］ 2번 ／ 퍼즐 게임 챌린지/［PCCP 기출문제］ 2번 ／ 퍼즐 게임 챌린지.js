@@ -1,32 +1,28 @@
 function solution(diffs, times, limit) {
-    
-    let max = 100000, min = 1, mid = undefined
-    let answer = max
-    while(min<=max){
-        mid = Math.floor((max+min)/2)
-        let spendTime = 0, over = false
-        for(let i=0; i<diffs.length; ++i){
+    var level = Infinity;
+    let min = 1;
+    let max = limit; 
+    while (min <= max){
+        let mid = parseInt((min + max) / 2);
+        
+        let time = 0;
+        for (let i = 0; i < diffs.length; i++) {
+            const diff = diffs[i];
+            const time_cur = times[i];
+            const time_prev = i > 0 ? times[i - 1] : 0;
             
-            if(mid-diffs[i]<0){
-                spendTime = spendTime + (diffs[i]-mid)*(times[i]+times[i-1]) + times[i] 
-            }else{ 
-                spendTime+= times[i]
-            }
-            
-            if(limit<spendTime){
-                over = true
-                break;
+            if (diff <= mid) {
+                time += time_cur;
+            } else {
+                time += (time_cur + time_prev) * (diff - mid) + time_cur;
             }
         }
-        
-        if(over){
-           min = mid + 1
-        }else{
-           answer = mid 
-           max = mid -1 
+        if (limit < time) {
+            min = mid + 1;  
+        } else {
+            max = mid - 1;
+            level = Math.min(mid, level);
         }
-        
     }
-    return answer
-    
+    return level;
 }
