@@ -1,16 +1,24 @@
 function solution(want, number, discount) {
-    var answer = 0;
-    let wantMap = new Map();
-    for (let i = 0; i < want.length; i++) wantMap.set(want[i], number[i]);
-    let len = number.reduce((a, b) => a + b);
-    for (let i = 0; i <= discount.length - len; i++){
-        let copyMap = new Map([...wantMap]);
-        for (let j = 0; j < 10; j++){
-            let product = discount[i + j];
-            if (copyMap.get(product))
-                copyMap.set(product, copyMap.get(product) - 1); 
+  const n = want.length
+  const discountInfo = {}
+  let res = 0
+  let start = 0
+  let end = 0
+  while (end < discount.length) {
+    discountInfo[discount[end]] = (discountInfo[discount[end]] ?? 0) + 1
+    // 모두 살 수 있는지 체크
+    if (end - start + 1 === 10) {
+      let flag = true
+      for (let i = 0; i < n; i++) {
+        if ((discountInfo[want[i]] || 0) < number[i]) {
+          flag = false
+          break //불가능
         }
-        answer += [...copyMap.values()].reduce((a, b) => a + b) === 0;
+      }
+      if (flag) res++
+      discountInfo[discount[start++]]--
     }
-    return answer;
+    end++
+  }
+  return res
 }
