@@ -1,48 +1,50 @@
-class Queue{
+class Queue {
     constructor(){
         this.items = {};
-        this.tailIndex = 0;
-        this.headIndex = 0;
-        this.total = 0;
+        this.front = 0;
+        this.rear = 0;
     }
     
     enqueue(item){
-        this.items[this.tailIndex] = item;
-        this.tailIndex++;
-        this.total += item;
+        this.items[this.rear]  = item;
+        this.rear++;
     }
     
     dequeue(){
-        if (this.headIndex < this.tailIndex){
-         const item = this.items[this.headIndex];
-         this.total -= item;
-         delete this.items[this.headIndex];
-         this.headIndex++;
-         return item;   
+        if (this.front < this.rear) {
+            const item = this.items[this.front];
+            delete this.items[this.front];
+            this.front++;
+            return item;
         }
     }
     
     getLength(){
-        return this.tailIndex - this.headIndex;
+        return this.rear - this.front;
     }
 }
 
-function solution(sequence, k) {
-    let Sequences = [];
-    let queue = new Queue();
-    for (let i = 0; i < sequence.length; i++){
-        queue.enqueue(sequence[i]);
-        while (queue.total > k){
-            queue.dequeue();
-        }
-        if (queue.total === k) {
-            Sequences.push([queue.headIndex, queue.tailIndex - 1]);
-            queue.dequeue();
+function solution(sequence, k){
+    let start = 0;
+    let end = 0;
+    let total = sequence[0];
+    let len = sequence.length;
+    const possibleAnswers = [];
+
+    while (start < sequence.length && end < sequence.length){     
+        if (total < k){
+            end++;
+            total += sequence[end];
+            continue;
+        } else if (total === k){
+            possibleAnswers.push([start, end]);
+            total -= sequence[start];
+            start++;
+        } else {
+            total -= sequence[start];
+            start++;
         }
     }
-    Sequences.sort((a, b) =>{
-       if ((a[1] - a[0]) == (b[1] - b[0])) return a[0] - b[0];
-       return (a[1] - a[0]) - (b[1] - b[0]);
-    });
-    return Sequences[0];
+   possibleAnswers.sort((a, b) => (a[1] - a[0]) - (b[1] - b[0]))
+   return possibleAnswers[0]
 }
